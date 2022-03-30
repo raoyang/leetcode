@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.authine.h3yun.engine.controller.dao.EngineTemplateMapper">
+
+    <insert id="insertTemplate" parameterType="com.authine.h3yun.engine.controller.entity.dto.TemplateEntity">
+        insert into h_template(`id`, `template`)
+        values(#{entity.id}, #{entity.template})
+    </insert>
+
+    <update id="updateTemplate">
+        update h_template
+        <set>
+            <if test="entity.template != '' and entity.template != null ">
+                template = #{entity.template}
+            </if>
+        </set>
+        where id = #{entity.id}
+    </update>
+
+    <select id="getTemplate" resultType="java.lang.String">
+        select template from h_template where id = 1;
+    </select>
+
+</mapper>

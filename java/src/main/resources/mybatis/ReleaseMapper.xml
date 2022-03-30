@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.authine.h3yun.engine.controller.dao.ReleaseMapper">
+
+    <insert id="insertResult" parameterType="com.authine.h3yun.engine.controller.entity.dto.ReleaseStatus">
+        insert into h_releaseresult(`keyword`, `shard`, `version`, `time`, `result`)
+        values(#{release.keyword}, #{release.shard}, #{release.version}, #{release.time}, #{release.result})
+    </insert>
+
+    <update id="updateResult" parameterType="com.authine.h3yun.engine.controller.entity.dto.ReleaseStatus">
+        update h_releaseresult
+        <set>
+            <if test="release.result != null and release.result != '' ">
+                result = #{release.result}
+            </if>
+        </set>
+        where keyword = #{release.keyword}
+    </update>
+
+    <select id="getReleaseResult" resultType="com.authine.h3yun.engine.controller.entity.dto.ReleaseStatus">
+        select keyword, shard, version, time, result from h_releaseresult
+        <where>
+            keyword in
+            <foreach item="key" collection="keys" separator="," open="(" close=")" index="">
+                       #{key}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="getReleaseResultOrderByTime" resultType="com.authine.h3yun.engine.controller.entity.dto.ReleaseStatus">
+        select keyword, shard, version, time, result from h_releaseresult
+        where time is not null
+        order by time desc limit #{count}
+    </select>
+
+</mapper>
