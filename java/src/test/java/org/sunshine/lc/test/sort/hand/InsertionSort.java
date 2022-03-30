@@ -3,7 +3,8 @@ package org.sunshine.lc.test.sort.hand;
 public class InsertionSort {
 
     public static void main(String args[]) {
-        int[] arr = {16,12,11,10,5,3,2,6,8,1,4,7,9,17,0};
+        //int[] arr = {16,12,11,10,5,3,2,6,8,1,4,7,9,17,0};
+        int arr[] = {6,5,4,3,2,1};
         sort(arr);
         System.out.print(arr);
     }
